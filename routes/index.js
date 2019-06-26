@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const cheerio = require('cheerio');
 const axios = require('axios')
 const db = require('/Users/brentabruzese/Desktop/projects/scraping-it/models/Article')
+
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -23,6 +25,5 @@ router.get('/scraper', function(req, res, next) {
     res.send('scrape completed')
   })
 })
-
 
 module.exports = router;

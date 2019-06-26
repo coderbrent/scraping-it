@@ -26,7 +26,9 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+
 mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
+
 
 // error handler
 app.use(function(err, req, res, next) {
