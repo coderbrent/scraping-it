@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cheerio = require('cheerio');
 const axios = require('axios')
-const db = require('/Users/brentabruzese/Desktop/projects/scraping-it/models/Article')
+const db = require('../models')
 
 
 router.get('/', function(req, res, next) {
@@ -10,20 +10,37 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/scraper', function(req, res, next) {
-  axios.get("www.nyt.com").then(response => {
+  axios.get("http://www.weeklyworldnews.com").then(function(response) {
     const $ = cheerio.load(response.data);
-    $("breaking-news").each(function(i, element) {
-      const result = {};
+    const arrResults = [], result = {}
 
-      result.title = $(this).children("a").text();
-      result.link = $(this).children("a").attr("href");
-
-      db.Article.create(result).then(dbArticle => {
-        console.log(dbArticle)
+      $("#ad-takeover").each(function(i, el) {
+        result.headline = $(this).find(".entry-title")
+        .text()
+        result.summary = $(this).find(".entry-excerpt")
+        .text()
+        
+        console.log(result)
+        arrResults.push(result);
       });
-    });
-    res.send('scrape completed')
+      return arrResults;
+    }).then(function(data) {
+      db.Article.create(data).then(dbArticle => {
+        console.log('this was added: ' + dbArticle)
+      })
+    })
+    
   })
+
+
+router.get('/db', function(req, res, next) {
+  db.Article.find({}).then(allArticles => {
+    res.json(allArticles)
+  })
+
+router.get()
+
+
 })
 
 module.exports = router;
