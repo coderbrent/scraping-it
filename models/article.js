@@ -5,11 +5,11 @@ const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
 
   headline: {
-    type: String,
+    type: Array,
     required: true
   },
   summary: {
-    type: String,
+    type: Array,
     required: true
   },
   URL: {

@@ -16,13 +16,13 @@ router.get('/scraper', function(req, res, next) {
 
       $("#ad-takeover").each(function(i, el) {
         result.headline = $(this).find(".entry-title")
-        .text()
+        .text().split("!")
         result.summary = $(this).find(".entry-excerpt")
-        .text()
-        
+        .text().split("\n\t\t\t")
         console.log(result)
         arrResults.push(result);
       });
+
       return arrResults;
     }).then(function(data) {
       db.Article.create(data).then(dbArticle => {
