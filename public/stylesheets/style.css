@@ -6,3 +6,13 @@ body {
 a {
   color: #00B7FF;
 }
+
+.Color1 {
+  background-color: rgb(174, 0, 255);
+  position: absolute;
+  left: -2px;
+  top: 324px;
+  width: 1924px;
+  height: 764px;
+  z-index: 3;
+}

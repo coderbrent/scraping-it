@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
 
 var app = express();
 
@@ -26,8 +27,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-
-mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 
 // error handler
