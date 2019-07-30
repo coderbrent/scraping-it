@@ -4,9 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-
+const port = process.env.PORT || 8080;
 const indexRouter = require('./routes/index');
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/scraper";
 
 var app = express();
 
@@ -29,6 +29,10 @@ app.use(function(req, res, next) {
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => { console.log('Mongo is connected')})
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -39,6 +43,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.listen(port, () => {
+  console.log(`The app is now listening on port ${port}`)
 });
 
 module.exports = app;
