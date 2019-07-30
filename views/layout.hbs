@@ -3,8 +3,27 @@
   <head>
     <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
     {{{body}}}
+
+  <script>
+    $(function() {
+
+  $("#getArticle").on("click", function() {
+    $.ajax('/db', {
+      method: "GET",
+      type: "application/json"
+    }).then(function(response) {
+      console.log(response)
+    })
+  })
+
+})
+  </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../public/javascripts/scraper.js"></script>
   </body>
 </html>

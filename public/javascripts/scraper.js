@@ -7,11 +7,9 @@ $(function() {
       method: "GET",
       type: "application/json"
     }).then(function(response) {
-      console.log(response.data)
-
+      console.log(response)
     })
   })
-
 
 
 })

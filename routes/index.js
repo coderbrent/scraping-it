@@ -19,27 +19,36 @@ router.get('/scraper', function(req, res, next) {
         .text().split("!")
         result.summary = $(this).find(".entry-excerpt")
         .text().split("\n\t\t\t")
-        console.log(result)
         arrResults.push(result);
       });
-
+      console.log(arrResults)
       return arrResults;
     }).then(function(data) {
       db.Article.create(data).then(dbArticle => {
-        console.log('this was added: ' + dbArticle)
       })
     })
     
   })
 
 
-router.get('/db', function(req, res, next) {
+router.get('/all', function(req, res, next) {
   db.Article.find({}).then(allArticles => {
     res.json(allArticles)
   })
 
-router.get()
-
+router.get('/db', function(req, res, next) {
+  db.Article.find({}).then(allArticles => {
+    for(i=0; i < allArticles.length; i++) {
+      let articles = {
+        headline: allArticles[i].headline[i],
+        summary: allArticles[i].summary[i]
+      }
+      console.log(articles)
+    }
+   
+  })
+})
+ 
 
 })
 
