@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const port = process.env.PORT || 8080;
 const indexRouter = require('./routes/index');
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/scraper";
 
