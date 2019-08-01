@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cheerio = require('cheerio');
 const axios = require('axios')
-const Article = require('../models/Article')
 const db = require('../models')
-
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
