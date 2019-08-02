@@ -33,6 +33,7 @@ router.get('/scraper', function(req, res, next) {
 router.get('/all', function(req, res, next) {
   db.Article.find({}).then(allArticles => {
     res.json(allArticles)
+    console.log('all articles')
   })
 
 router.get('/db', function(req, res, next) {
